@@ -35,6 +35,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             overflow: hidden;
+            cursor: pointer;
         }
 
         .menu-card:hover {
@@ -45,7 +46,17 @@
 
         .menu-card:hover .card-img {
             transform: scale(1.1);
-            opacity: 0.4;
+            opacity: 0.3;
+        }
+
+        .menu-card.is-active .card-img {
+            opacity: 0.7 !important;
+            transform: scale(1.05);
+        }
+
+        .menu-card.is-active {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--cafe-gold);
         }
 
         .card-img {
@@ -85,6 +96,25 @@
             opacity: 0.03;
             pointer-events: none;
             z-index: 999;
+        }
+
+        .story-image-container {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .story-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1);
+            transition: filter 1s ease;
+        }
+
+        .story-image-container:hover img {
+            filter: grayscale(0);
         }
     </style>
 </head>
@@ -137,7 +167,6 @@
 
     <section id="menu" class="py-40 px-6 md:px-20 max-w-[1400px] mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
-            
             <div class="lg:col-span-4 sticky top-40 h-fit">
                 <span class="text-[#d4af37] tracking-[0.6em] text-[9px] font-bold uppercase block mb-6">Menu No. 01</span>
                 <h2 class="text-6xl font-bold tracking-tighter leading-none mb-8">Specialty <br> Selection</h2>
@@ -155,7 +184,6 @@
             <div class="lg:col-span-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="menu-card p-10 rounded-xl flex flex-col justify-between h-[320px] group relative">
-                        <!-- Top-down black coffee image -->
                         <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Top-down Black Americano">
                         <div class="flex justify-between items-start z-10">
                             <span class="text-[10px] text-[#d4af37] font-bold tracking-widest">BLACK</span>
@@ -231,6 +259,46 @@
         </div>
     </section>
 
+    <section id="about" class="py-40 px-6 md:px-20 bg-[#060606]">
+        <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+            <div class="story-image-container">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop" alt="The Roastery">
+                <div class="absolute bottom-10 left-10 z-10">
+                    <p class="text-[10px] font-bold tracking-[0.5em] text-[#d4af37] uppercase">Est. 2023</p>
+                </div>
+            </div>
+            
+            <div class="space-y-12">
+                <div>
+                    <span class="text-[#d4af37] tracking-[0.6em] text-[9px] font-bold uppercase block mb-6">Our Story</span>
+                    <h2 class="text-6xl font-bold tracking-tighter leading-none mb-10">Crafted for the <br><span class="serif-italic font-normal text-[#d4af37]">Nocturnal</span></h2>
+                    <div class="space-y-8 text-gray-400 font-light leading-relaxed tracking-wide">
+                        <p>
+                            After Hours started with a simple observation: Bhairahawa sleeps too early for its thinkers. We built a sanctuary for those who do their best work when the sun is down.
+                        </p>
+                        <p>
+                            Your focus is our priority. We source 100% organic beans from the high-altitude plantations of Gulmi and Illam, roasting them in small batches to preserve the bold, earthy notes unique to Nepali soil.
+                        </p>
+                        <p>
+                            This is not your typical high-street cafe. There is no loud music or bright lights here. We provide a minimalist atmosphere designed to fade into the background while you build your next big project.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-10 pt-10 border-t border-white/5">
+                    <div>
+                        <h5 class="text-2xl font-bold mb-2">100%</h5>
+                        <p class="text-[10px] text-gray-500 tracking-widest uppercase font-bold">Organic Origin</p>
+                    </div>
+                    <div>
+                        <h5 class="text-2xl font-bold mb-2">02 AM</h5>
+                        <p class="text-[10px] text-gray-500 tracking-widest uppercase font-bold">Midnight Closure</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="py-40 px-8 text-center border-t border-white/5 relative overflow-hidden">
         <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1500&auto=format&fit=crop" 
              class="absolute inset-0 w-full h-full object-cover opacity-5 grayscale" alt="Footer Background">
@@ -278,6 +346,16 @@
                 stagger: 0.1,
                 duration: 1.2,
                 ease: "power4.out"
+            });
+
+            const cards = document.querySelectorAll('.menu-card');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('is-active');
+                    cards.forEach(c => {
+                        if (c !== card) c.classList.remove('is-active');
+                    });
+                });
             });
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
