@@ -1,1 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After Hours Cafe | Premium Brews & Bites</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --cafe-dark: #080808;
+            --cafe-gold: #d4af37;
+            --cafe-accent: #1a1a1a;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+        }
 
+        body {
+            background-color: var(--cafe-dark);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-glow {
+            background: radial-gradient(circle at center, #2a1f0d 0%, #080808 100%);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cafe-gold);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .menu-item {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--cafe-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--cafe-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
+        <div class="text-xl font-extrabold tracking-widest flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center">
+                <span class="text-white">AH</span>
+            </div>
+            AFTER HOURS
+        </div>
+        <div class="hidden md:flex gap-10 text-xs font-bold tracking-[0.2em]">
+            <a href="#home" class="nav-link">HOME</a>
+            <a href="#coffee-menu" class="nav-link">COFFEE</a>
+            <a href="#food-menu" class="nav-link">FOOD</a>
+            <a href="#about" class="nav-link">OUR STORY</a>
+        </div>
+        <a href="#contact" class="hidden md:block bg-white text-black px-6 py-2 text-xs font-bold rounded-sm hover:bg-[#d4af37] transition-colors">VISIT US</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-4 hero-glow relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30">
+            <div class="absolute top-[20%] left-[10%] w-[400px] h-[400px] bg-[#d4af37] rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[20%] right-[10%] w-[300px] h-[300px] bg-white rounded-full blur-[150px]"></div>
+        </div>
+
+        <div id="hero-content">
+            <h2 class="text-[#d4af37] tracking-[0.4em] text-sm font-bold mb-6 uppercase">Established in Lalitpur</h2>
+            <h1 class="text-7xl md:text-9xl font-extrabold tracking-tighter mb-8 leading-none">
+                CRAFTED <br> MIDNIGHTS
+            </h1>
+            <p class="text-gray-400 max-w-xl mx-auto mb-12 text-lg leading-relaxed font-light">
+                Premium Himalayan beans meet artisanal late-night dining. Your sanctuary for productivity and conversation in the heart of Jhamsikhel.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#coffee-menu" class="bg-[#d4af37] text-black px-10 py-5 rounded-full font-bold hover:scale-105 transition-transform">EXPLORE MENU</a>
+                <a href="#about" class="border border-white/20 px-10 py-5 rounded-full font-bold hover:bg-white/5 transition-all">LEARN MORE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coffee Menu Section -->
+    <section id="coffee-menu" class="py-32 px-6 md:px-20 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <span class="text-[#d4af37] tracking-[0.3em] text-xs font-bold uppercase mb-4 block">Selection One</span>
+            <h3 class="text-5xl font-bold">Coffee Specials</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <!-- Coffee Column 1 -->
+            <div class="space-y-10">
+                <h5 class="text-2xl font-bold border-b border-white/10 pb-4">Hot Brews</h5>
+                
+                <div class="flex justify-between menu-item">
+                    <div>
+                        <h6 class="text-lg font-semibold">Americano</h6>
+                        <p class="text-sm text-gray-500">Double shot espresso with hot water.</p>
+                    </div>
+                    <span class="font-bold text-[#d4af37]">Rs. 180</span>
+                </div>
+
+                <div class="flex justify-between menu-item">
+                    <div>
+                        <h6 class="text-lg font-semibold">Caffè Latte</h6>
+                        <p class="text-sm text-gray-500">Espresso with silky steamed milk.</p>
+                    </div>
+                    <span class="font-bold text-[#d4af37]">Rs. 240</span>
+                </div>
+
+                <div class="flex justify-between menu-item">
+                    <div>
+                        <h6 class="text-lg font-semibold">Flat White</h6>
+                        <p class="text-sm text-gray-500">Velvety milk over double ristretto.</p>
+                    </div>
+                    <span class="font-bold text-[#d4af37]">Rs. 260</span>
+                </div>
+
+                <div class="flex justify-between menu-item">
+                    <div>
+                        <h6 class="text-lg font-semibold">Spanish Latte</h6>
+                        <p class="text-sm text-gray-500">Sweetened with condensed milk.</p>
+                    </div>
+                    <span class="font-bold text-[#d4af37]">Rs. 280</span>
+                </div>
+            </div>
+
+            <!-- Coffee Column 2 -->
+            <div class="space-y-10">
+                <h5 class="text-2xl font-bold border-b border-white/10 pb-4">Iced & Cold</h5>
+                
+                <div class="flex justify-between menu-item">
+                    <div>
+                        <h6 class="text-lg font-semibold">Signature Cold Brew</h6>
+                        <p class="text-sm text-gray-500">18-hour slow-steeped Himalayan beans.</p>
+                    </div>
+                    <span class="font-bold text-[#d4af37]">Rs. 260</span>
+                </div>
+
+                <div class="flex justify-between menu-item">
+                    <div>
+                        <h6 class="text-lg font-semibold">Iced Americano</h6>
+                        <p class="text-sm text-gray-500">Refreshing double shot over ice.</p>
+                    </div>
+                    <span class="font-bold text-[#d4af37]">Rs. 200</span>
+                </div>
+
+                <div class="flex justify-between menu-item">
+                    <div>
+                        <h6 class="text-lg font-semibold">Affogato Royale</h6>
+                        <p class="text-sm text-gray-500">Espresso over vanilla bean gelato.</p>
+                    </div>
+                    <span class="font-bold text-[#d4af37]">Rs. 340</span>
+                </div>
+
+                <div class="flex justify-between menu-item">
+                    <div>
+                        <h6 class="text-lg font-semibold">Cold Brew Tonic</h6>
+                        <p class="text-sm text-gray-500">Cold brew topped with premium tonic.</p>
+                    </div>
+                    <span class="font-bold text-[#d4af37]">Rs. 290</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Menu Section -->
+    <section id="food-menu" class="py-32 px-6 md:px-20 bg-white/5 border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="text-[#d4af37] tracking-[0.3em] text-xs font-bold uppercase mb-4 block">Selection Two</span>
+                <h3 class="text-5xl font-bold">Artisanal Bites</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Food Column 1 -->
+                <div class="space-y-10">
+                    <h5 class="text-2xl font-bold border-b border-white/10 pb-4">Starters & Snacks</h5>
+                    
+                    <div class="flex justify-between menu-item">
+                        <div>
+                            <h6 class="text-lg font-semibold">Truffle Fries</h6>
+                            <p class="text-sm text-gray-500">Hand-cut with parmesan and herbs.</p>
+                        </div>
+                        <span class="font-bold">Rs. 420</span>
+                    </div>
+
+                    <div class="flex justify-between menu-item">
+                        <div>
+                            <h6 class="text-lg font-semibold">Honey Soy Wings</h6>
+                            <p class="text-sm text-gray-500">Sticky glaze with toasted sesame.</p>
+                        </div>
+                        <span class="font-bold">Rs. 680</span>
+                    </div>
+
+                    <div class="flex justify-between menu-item">
+                        <div>
+                            <h6 class="text-lg font-semibold">Avocado Toast</h6>
+                            <p class="text-sm text-gray-500">Sourdough bread with chili flakes.</p>
+                        </div>
+                        <span class="font-bold">Rs. 550</span>
+                    </div>
+
+                    <div class="flex justify-between menu-item">
+                        <div>
+                            <h6 class="text-lg font-semibold">Chicken Choila</h6>
+                            <p class="text-sm text-gray-500">Traditional spicy roasted chicken.</p>
+                        </div>
+                        <span class="font-bold">Rs. 450</span>
+                    </div>
+                </div>
+
+                <!-- Food Column 2 -->
+                <div class="space-y-10">
+                    <h5 class="text-2xl font-bold border-b border-white/10 pb-4">Main Course</h5>
+                    
+                    <div class="flex justify-between menu-item">
+                        <div>
+                            <h6 class="text-lg font-semibold">Signature Burger</h6>
+                            <p class="text-sm text-gray-500">Bacon jam, cheddar, and brioche bun.</p>
+                        </div>
+                        <span class="font-bold">Rs. 850</span>
+                    </div>
+
+                    <div class="flex justify-between menu-item">
+                        <div>
+                            <h6 class="text-lg font-semibold">Mushroom Pasta</h6>
+                            <p class="text-sm text-gray-500">Creamy sauce with local shiitake.</p>
+                        </div>
+                        <span class="font-bold">Rs. 720</span>
+                    </div>
+
+                    <div class="flex justify-between menu-item">
+                        <div>
+                            <h6 class="text-lg font-semibold">Grilled Sandwich</h6>
+                            <p class="text-sm text-gray-500">Chicken, cheese, and house mayo.</p>
+                        </div>
+                        <span class="font-bold">Rs. 580</span>
+                    </div>
+
+                    <div class="flex justify-between menu-item">
+                        <div>
+                            <h6 class="text-lg font-semibold">Jhol Momo</h6>
+                            <p class="text-sm text-gray-500">Dumplings in spicy soybean soup.</p>
+                        </div>
+                        <span class="font-bold">Rs. 380</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6 md:px-20 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-[#d4af37] rounded-3xl opacity-10 blur-2xl"></div>
+                <div class="bg-[#1a1a1a] aspect-square rounded-3xl flex items-center justify-center p-12 relative overflow-hidden">
+                    <div class="text-center z-10">
+                        <h4 class="text-7xl font-black text-[#d4af37] mb-4">2AM</h4>
+                        <p class="tracking-widest font-bold">WE NEVER SLEEP</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <span class="text-[#d4af37] tracking-[0.3em] text-xs font-bold uppercase mb-6 block">Our Essence</span>
+                <h3 class="text-5xl font-bold mb-8 leading-tight">The Late Night Sanctuary of Lalitpur.</h3>
+                <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                    We source our beans from small-hold farmers in the Gorkha region, roasted to perfection to sustain your late-night work or conversations.
+                </p>
+                <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
+                    <div>
+                        <h6 class="text-3xl font-bold text-white mb-2">100%</h6>
+                        <p class="text-gray-500 text-sm font-semibold">Organic Beans</p>
+                    </div>
+                    <div>
+                        <h6 class="text-3xl font-bold text-white mb-2">02 AM</h6>
+                        <p class="text-gray-500 text-sm font-semibold">Closing Time</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 md:px-20 bg-white/5">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <h3 class="text-4xl md:text-6xl font-bold mb-6">Drop by Tonight.</h3>
+            <p class="text-gray-400">Jhamsikhel, Lalitpur, Nepal</p>
+        </div>
+        <div class="max-w-xl mx-auto">
+            <form class="space-y-6" onsubmit="event.preventDefault();">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="Your Name" class="bg-black/40 border border-white/10 rounded-2xl p-5 focus:border-[#d4af37] outline-none">
+                    <input type="email" placeholder="Email Address" class="bg-black/40 border border-white/10 rounded-2xl p-5 focus:border-[#d4af37] outline-none">
+                </div>
+                <button class="w-full bg-white text-black font-extrabold py-5 rounded-2xl hover:bg-[#d4af37] transition-all">SEND MESSAGE</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-16 px-8 border-t border-white/5 text-center">
+        <p class="text-gray-500 text-sm tracking-widest">&copy; 2025 AFTER HOURS CAFE. CRAFTED IN NEPAL.</p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            gsap.from("#hero-content > *", {
+                y: 50,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "expo.out"
+            });
+
+            gsap.to(".menu-item", {
+                scrollTrigger: {
+                    trigger: "#coffee-menu",
+                    start: "top 80%"
+                },
+                y: 0,
+                opacity: 1,
+                stagger: 0.05,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+
+            gsap.to(".menu-item", {
+                scrollTrigger: {
+                    trigger: "#food-menu",
+                    start: "top 80%"
+                },
+                y: 0,
+                opacity: 1,
+                stagger: 0.05,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
