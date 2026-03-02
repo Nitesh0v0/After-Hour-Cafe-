@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>After Hours Cafe | Siddharthanagar</title>
+    <title>After Hours | Siddharthanagar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,700&display=swap');
         
         :root {
-            --cafe-dark: #080808;
+            --cafe-dark: #030303;
             --cafe-gold: #d4af37;
             --text-main: #ffffff;
         }
@@ -21,349 +21,262 @@
             color: var(--text-main);
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
-        }
-        .hero-glow {
-            background: radial-gradient(circle at center, #2a1f0d 0%, #080808 100%);
+            cursor: auto;
         }
 
-        .nav-link {
-            position: relative;
-            transition: color 0.3s;
+        .serif-italic {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
         }
 
-        .nav-link::after {
-            content: '';
+        .menu-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+        }
+
+        .menu-card:hover {
+            background: rgba(212, 175, 55, 0.05);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .menu-card:hover .card-img {
+            transform: scale(1.1);
+            opacity: 0.4;
+        }
+
+        .card-img {
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--cafe-gold);
-            transition: width 0.3s;
-        }
-
-        .nav-link:hover::after {
+            inset: 0;
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            transition: all 0.7s ease;
+            z-index: -1;
         }
 
-        .menu-item-row {
+        .stagger-item {
             opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--cafe-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--cafe-gold);
+            transform: translateY(30px);
         }
 
         .creative-logo {
             position: relative;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 40px;
+            height: 40px;
         }
 
-        .logo-circle {
+        .logo-ring {
             position: absolute;
             width: 100%;
             height: 100%;
-            border: 2px solid var(--cafe-gold);
+            border: 1px solid var(--cafe-gold);
             border-radius: 50%;
-            border-top-color: transparent;
-            transform: rotate(-45deg);
         }
 
-        .logo-inner {
-            width: 12px;
-            height: 12px;
-            background: var(--cafe-gold);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--cafe-gold);
-        }
-
-        .menu-thumb {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+        .grain {
+            position: fixed;
+            inset: 0;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 999;
         }
     </style>
 </head>
 <body>
-    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
-        <div class="flex items-center gap-4 group cursor-pointer">
+    <div class="grain"></div>
+
+    <nav class="fixed w-full z-50 px-10 py-10 flex justify-between items-center bg-transparent">
+        <div class="flex items-center gap-6 group cursor-pointer">
             <div class="creative-logo">
-                <div class="logo-circle"></div>
-                <div class="logo-inner"></div>
+                <div class="logo-ring"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-1 h-1 bg-[#d4af37] rounded-full shadow-[0_0_10px_#d4af37]"></div>
+                </div>
             </div>
             <div class="flex flex-col">
-                <span class="text-xl font-extrabold tracking-widest leading-none">AFTER HOURS</span>
-                <span class="text-[10px] text-[#d4af37] tracking-[0.3em] font-bold uppercase">Bhairahawa • Nepal</span>
-            </div>
-        </div>
-        <div class="hidden md:flex gap-10 text-xs font-bold tracking-[0.2em]">
-            <a href="#home" class="nav-link">HOME</a>
-            <a href="#menu" class="nav-link">MENU</a>
-            <a href="#about" class="nav-link">OUR STORY</a>
-        </div>
-        <a href="tel:+9779867898711" class="hidden md:block border border-[#d4af37] text-[#d4af37] px-6 py-2 text-xs font-bold rounded-full hover:bg-[#d4af37] hover:text-black transition-all">CALL US</a>
-    </nav>
-
-    <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-between px-8 md:px-20 hero-glow relative overflow-hidden pt-20">
-        <div id="hero-text" class="md:w-1/2 z-10 text-center md:text-left">
-            <h2 class="text-[#d4af37] tracking-[0.4em] text-sm font-bold mb-6 uppercase">Siddharthanagar's Finest Brew</h2>
-            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-none">
-                CRAFTED <br> <span class="text-[#d4af37]">MIDNIGHTS</span>
-            </h1>
-            <p class="text-gray-400 max-w-lg mb-12 text-lg leading-relaxed font-light">
-                Premium Himalayan beans meet your late-night sanctuary. We serve productivity and conversation until the early hours.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-6">
-                <a href="#menu" class="bg-[#d4af37] text-black px-10 py-5 rounded-full font-bold hover:scale-105 transition-transform text-center uppercase tracking-widest text-xs">Explore Menu</a>
-                <a href="#about" class="border border-white/20 px-10 py-5 rounded-full font-bold hover:bg-white/5 transition-all text-center uppercase tracking-widest text-xs">Learn More</a>
+                <span class="text-xl font-extrabold tracking-tighter leading-none">AFTER HOURS</span>
+                <span class="text-[8px] text-[#d4af37] tracking-[0.8em] font-bold uppercase mt-1 ml-1">Siddharthanagar</span>
             </div>
         </div>
         
-        <div id="hero-image" class="md:w-1/2 mt-12 md:mt-0 flex justify-center relative">
-            <div class="absolute w-[300px] h-[300px] bg-[#d4af37] rounded-full blur-[100px] opacity-20"></div>
-            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop" 
-                 alt="Premium Coffee" 
-                 class="w-[400px] h-[500px] object-cover rounded-[3rem] shadow-2xl border border-white/10">
+        <div class="hidden md:flex gap-16 text-[9px] font-bold tracking-[0.5em] uppercase text-gray-400">
+            <a href="#home" class="hover:text-white transition-colors">01 Index</a>
+            <a href="#menu" class="hover:text-white transition-colors">02 Menu</a>
+            <a href="#about" class="hover:text-white transition-colors">03 Story</a>
+        </div>
+        
+        <a href="tel:+9779867898711" class="text-[10px] font-bold tracking-widest uppercase border-b border-[#d4af37] pb-1 hover:text-[#d4af37] transition-all">
+            Inquire
+        </a>
+    </nav>
+
+    <section id="home" class="min-h-screen flex flex-col items-center justify-center px-8 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=2000&auto=format&fit=crop" 
+                 class="w-full h-full object-cover opacity-20 grayscale" alt="Dark Coffee Background">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303]"></div>
+        </div>
+
+        <div class="text-center z-10">
+            <p class="text-[#d4af37] tracking-[1em] text-[10px] font-bold mb-10 uppercase opacity-60 stagger-item">The Midnight Sanctuary</p>
+            <h1 class="text-8xl md:text-[14rem] font-extrabold tracking-tighter mb-4 leading-[0.8] stagger-item">
+                STAY <br> <span class="serif-italic font-normal text-[#d4af37]">Awake</span>
+            </h1>
+            <div class="h-px w-24 bg-white/20 mx-auto my-12 stagger-item"></div>
+            <p class="text-gray-500 max-w-lg mx-auto text-sm tracking-wide font-light leading-relaxed stagger-item">
+                Curating premium high-altitude beans for the thinkers of Bhairahawa. Open until the early hours.
+            </p>
         </div>
     </section>
 
-    <!-- Detailed Menu Section -->
-    <section id="menu" class="py-32 px-6 md:px-20 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
+    <section id="menu" class="py-40 px-6 md:px-20 max-w-[1400px] mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
             
-            <!-- Left Column: Coffee Menu -->
+            <div class="lg:col-span-4 sticky top-40 h-fit">
+                <span class="text-[#d4af37] tracking-[0.6em] text-[9px] font-bold uppercase block mb-6">Menu No. 01</span>
+                <h2 class="text-6xl font-bold tracking-tighter leading-none mb-8">Specialty <br> Selection</h2>
+                <p class="text-gray-500 text-sm font-light max-w-xs leading-relaxed mb-10">
+                    Sourced from organic Himalayan farms and prepared with precision for nocturnal clarity.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <span class="w-12 h-px bg-[#d4af37]"></span>
+                        <span class="text-[10px] font-bold tracking-widest text-white">ESPRESSO BAR</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="menu-card p-10 rounded-xl flex flex-col justify-between h-[320px] group relative">
+                        <img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Americano">
+                        <div class="flex justify-between items-start z-10">
+                            <span class="text-[10px] text-[#d4af37] font-bold tracking-widest">BLACK</span>
+                            <span class="text-sm font-bold">RS 180</span>
+                        </div>
+                        <div class="z-10">
+                            <h4 class="text-3xl font-bold mb-3 tracking-tight">Americano</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">Double-shot espresso pulled from 100% Arabica beans over pure spring water.</p>
+                        </div>
+                    </div>
+
+                    <div class="menu-card p-10 rounded-xl flex flex-col justify-between h-[320px] md:mt-12 group relative">
+                        <img src="https://images.unsplash.com/photo-1572286258217-40142c1c6a70?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Latte">
+                        <div class="flex justify-between items-start z-10">
+                            <span class="text-[10px] text-[#d4af37] font-bold tracking-widest">MILK</span>
+                            <span class="text-sm font-bold">RS 240</span>
+                        </div>
+                        <div class="z-10">
+                            <h4 class="text-3xl font-bold mb-3 tracking-tight">Caffè Latte</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">Silk micro-foam over a rich espresso base. Smooth, sweet, and balanced.</p>
+                        </div>
+                    </div>
+
+                    <div class="menu-card p-10 rounded-xl flex flex-col justify-between h-[320px] group relative">
+                        <img src="https://images.unsplash.com/photo-1534706936160-d5ee67737249?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Flat White">
+                        <div class="flex justify-between items-start z-10">
+                            <span class="text-[10px] text-[#d4af37] font-bold tracking-widest">MILK</span>
+                            <span class="text-sm font-bold">RS 220</span>
+                        </div>
+                        <div class="z-10">
+                            <h4 class="text-3xl font-bold mb-3 tracking-tight">Flat White</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">Velvety milk poured over a double ristretto shot for a coffee-forward profile.</p>
+                        </div>
+                    </div>
+
+                    <div class="menu-card p-10 rounded-xl flex flex-col justify-between h-[320px] md:mt-12 group relative">
+                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Nitro Brew">
+                        <div class="flex justify-between items-start z-10">
+                            <span class="text-[10px] text-[#d4af37] font-bold tracking-widest">COLD</span>
+                            <span class="text-sm font-bold">RS 320</span>
+                        </div>
+                        <div class="z-10">
+                            <h4 class="text-3xl font-bold mb-3 tracking-tight">Nitro Cold Brew</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">12-hour steeped concentrate infused with nitrogen for a creamy finish.</p>
+                        </div>
+                    </div>
+
+                    <div class="menu-card p-10 rounded-xl flex flex-col justify-between h-[320px] group relative">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Waffle">
+                        <div class="flex justify-between items-start z-10">
+                            <span class="text-[10px] text-[#d4af37] font-bold tracking-widest">SWEET</span>
+                            <span class="text-sm font-bold">RS 350</span>
+                        </div>
+                        <div class="z-10">
+                            <h4 class="text-3xl font-bold mb-3 tracking-tight">Waffle Cloud</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">Light waffles topped with wild honey, vanilla cream, and seasonal berries.</p>
+                        </div>
+                    </div>
+
+                    <div class="menu-card p-10 rounded-xl flex flex-col justify-between h-[320px] md:mt-12 group relative">
+                        <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Avocado Toast">
+                        <div class="flex justify-between items-start z-10">
+                            <span class="text-[10px] text-[#d4af37] font-bold tracking-widest">SAVORY</span>
+                            <span class="text-sm font-bold">RS 420</span>
+                        </div>
+                        <div class="z-10">
+                            <h4 class="text-3xl font-bold mb-3 tracking-tight">Smashed Green</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">Sourdough toast with organic avocado, chili flakes, and a poached farm egg.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-40 px-8 text-center border-t border-white/5 relative overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1500&auto=format&fit=crop" 
+             class="absolute inset-0 w-full h-full object-cover opacity-5 grayscale" alt="Footer Background">
+        <div class="creative-logo mx-auto mb-20 scale-150 relative z-10">
+            <div class="logo-ring"></div>
+        </div>
+        <h2 class="text-4xl md:text-7xl font-bold tracking-tighter mb-20 serif-italic relative z-10">Find your corner.</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-[10px] font-bold tracking-[0.4em] text-gray-500 uppercase relative z-10">
             <div>
-                <h3 class="text-3xl font-bold mb-12 pb-4 border-b border-white/10 flex justify-between items-end">
-                    Coffee Menu
-                </h3>
-                
-                <div class="space-y-10">
-                    <!-- Item 1 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Americano">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Americano</h4>
-                                <span class="text-[#d4af37] font-bold">RS 180</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">Pure high-altitude Himalayan Arabica double shot with hot water.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1572286258217-40142c1c6a70?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Hot Brew">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Hot Brews</h4>
-                                <span class="text-[#d4af37] font-bold">RS 220</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">Freshly roasted beans hand-poured for a rich and complex flavor profile.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Coffee Spelt">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Coffee Specialty</h4>
-                                <span class="text-[#d4af37] font-bold">RS 280</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">Our house signature blend with hints of dark chocolate and nut.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <h3 class="text-3xl font-bold mb-12 mt-20 pb-4 border-b border-white/10">
-                    Food Menu
-                </h3>
-                
-                <div class="space-y-10">
-                    <!-- Food Item 1 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Morning Brew">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Waffle Cloud</h4>
-                                <span class="text-[#d4af37] font-bold">RS 350</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">Light, airy waffles served with seasonal fruit and organic honey.</p>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-white mb-4 tracking-[1em]">Location</p>
+                <p>Siddharthanagar-08<br>Bhairahawa, Nepal</p>
             </div>
-
-            <!-- Right Column: More Coffee & Sides -->
             <div>
-                <h3 class="text-3xl font-bold mb-12 pb-4 border-b border-white/10">
-                    More Selections
-                </h3>
-                
-                <div class="space-y-10">
-                    <!-- Item 4 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Coffee & Crew">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Caffè Latte</h4>
-                                <span class="text-[#d4af37] font-bold">RS 240</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">Velvety steamed milk poured over a rich espresso base.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 5 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Pastry">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Butter Croissant</h4>
-                                <span class="text-[#d4af37] font-bold">RS 150</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">Flaky, golden-brown layers baked fresh every evening.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 6 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Cold Brew">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Nitro Cold Brew</h4>
-                                <span class="text-[#d4af37] font-bold">RS 320</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">12-hour steeped cold brew infused with nitrogen for a creamy finish.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 7 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Dessert">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Tiramisu Slice</h4>
-                                <span class="text-[#d4af37] font-bold">RS 400</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">Espresso-soaked layers with mascarpone and cocoa dusting.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 8 -->
-                    <div class="flex items-center gap-6 menu-item-row">
-                        <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=200&auto=format&fit=crop" class="menu-thumb" alt="Sandwich">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="text-xl font-bold">Pesto Panini</h4>
-                                <span class="text-[#d4af37] font-bold">RS 380</span>
-                            </div>
-                            <p class="text-sm text-gray-500 leading-tight">Toasted sourdough with fresh pesto, mozzarella, and sun-dried tomatoes.</p>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-white mb-4 tracking-[1em]">Connect</p>
+                <p>+977 9867898711<br>@afterhours.bhw</p>
+            </div>
+            <div>
+                <p class="text-white mb-4 tracking-[1em]">Open</p>
+                <p>Every Night<br>4:00 PM - 2:00 AM</p>
             </div>
         </div>
-    </section>
-
-    <section id="about" class="py-32 px-6 md:px-20 bg-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                <div class="relative rounded-[2rem] overflow-hidden shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1000&auto=format&fit=crop" 
-                         alt="Fresh Coffee Beans" 
-                         class="w-full h-[600px] object-cover">
-                </div>
-                
-                <div class="space-y-8">
-                    <span class="text-[#d4af37] tracking-[0.3em] text-xs font-bold uppercase block">The Bhairahawa Chapter</span>
-                    <h3 class="text-5xl font-extrabold leading-tight">Elevating the coffee culture in Siddharthanagar.</h3>
-                    <p class="text-gray-400 text-lg leading-relaxed">
-                        Bringing the essence of Himalayan high-altitude beans to the plains of Bhairahawa. We are more than a cafe; we are a hub for the community to connect, create, and recharge.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-8 pt-10 border-t border-white/10">
-                        <div class="stat-item">
-                            <h5 class="text-4xl font-bold text-[#d4af37]" data-target="2">0</h5>
-                            <p class="text-xs text-gray-500 font-bold tracking-widest uppercase mt-2">AM Closing</p>
-                        </div>
-                        <div class="stat-item">
-                            <h5 class="text-4xl font-bold text-[#d4af37]" data-target="100">0%</h5>
-                            <p class="text-xs text-gray-500 font-bold tracking-widest uppercase mt-2">Organic</p>
-                        </div>
-                        <div class="stat-item">
-                            <h5 class="text-4xl font-bold text-[#d4af37]" data-target="986">0</h5>
-                            <p class="text-xs text-gray-500 font-bold tracking-widest uppercase mt-2">Community</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-32 px-6 md:px-20 bg-black">
-        <div class="max-w-4xl mx-auto text-center">
-            <h3 class="text-4xl md:text-6xl font-bold mb-8 italic tracking-tight">Visit Us in Bhairahawa.</h3>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-12 text-sm font-bold tracking-widest text-[#d4af37]">
-                <a href="https://instagram.com" class="hover:text-white transition-colors">INSTAGRAM / @AFTERHOURS.BHW</a>
-                <a href="tel:+9779867898711" class="hover:text-white transition-colors">PHONE / +977 9867898711</a>
-                <span class="uppercase">SIDDHARTHANAGAR, BHAIRAHAWA</span>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-16 px-8 border-t border-white/5 text-center">
-        <p class="text-gray-500 text-xs tracking-[0.4em] uppercase">&copy; 2025 AFTER HOURS CAFE • SIDDHARTHANAGAR</p>
+        <p class="text-gray-800 text-[8px] tracking-[1em] uppercase mt-40 font-bold relative z-10">&copy; 2025 After Hours Cafe Collective</p>
     </footer>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
         window.addEventListener('DOMContentLoaded', () => {
-            gsap.from("#hero-text > *", { x: -100, opacity: 0, duration: 1.5, stagger: 0.2, ease: "expo.out" });
-            gsap.from("#hero-image", { scale: 0.8, opacity: 0, duration: 2, ease: "power4.out" });
-
-            gsap.to(".menu-item-row", {
-                scrollTrigger: { trigger: "#menu", start: "top 80%" },
-                y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: "power2.out"
+            gsap.to(".stagger-item", {
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                stagger: 0.2,
+                ease: "expo.out"
             });
 
-            const counters = document.querySelectorAll('.stat-item h5');
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const suffix = counter.innerText.includes('%') ? '%' : '';
-                
-                ScrollTrigger.create({
-                    trigger: "#about",
-                    start: "top 60%",
-                    onEnter: () => {
-                        let count = 0;
-                        const updateCount = () => {
-                            const speed = target / 50;
-                            if(count < target) {
-                                count += speed;
-                                counter.innerText = Math.floor(count) + suffix;
-                                setTimeout(updateCount, 20);
-                            } else {
-                                counter.innerText = target + suffix;
-                            }
-                        };
-                        updateCount();
-                    }
-                });
+            gsap.to(".menu-card", {
+                scrollTrigger: {
+                    trigger: "#menu",
+                    start: "top 60%"
+                },
+                opacity: 1,
+                y: 0,
+                stagger: 0.1,
+                duration: 1.2,
+                ease: "power4.out"
             });
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
