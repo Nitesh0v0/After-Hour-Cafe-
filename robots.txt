@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nitesh0v0.github.io/After-Hour-Cafe-/sitemap.xml
